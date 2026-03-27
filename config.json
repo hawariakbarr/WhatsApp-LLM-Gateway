@@ -1,0 +1,83 @@
+{
+  "gateway": {
+    "port": 3000,
+    "host": "localhost",
+    "logLevel": "info",
+    "sessionStore": "./sessions",
+    "logStore": "./logs"
+  },
+  "whatsapp": {
+    "enabled": true,
+    "autoReconnect": true,
+    "qrTimeout": 60000,
+    "messageQueue": {
+      "enabled": true,
+      "maxSize": 100
+    }
+  },
+  "llm": {
+    "defaultModel": "anthropic/claude-sonnet-4-5",
+    "fallbackEnabled": true,
+    "fallbackChain": [
+      "anthropic/claude-sonnet-4-5",
+      "google/gemini-2.5-pro",
+      "xai/grok-2",
+      "deepseek/deepseek-chat"
+    ],
+    "providerPriority": {
+      "anthropic": 1,
+      "google": 2,
+      "xai": 3,
+      "deepseek": 4
+    },
+    "rateLimit": {
+      "tpm": 10000,
+      "rpm": 100,
+      "cooldownMinutes": 5
+    },
+    "providers": {
+      "anthropic": {
+        "enabled": true,
+        "baseUrl": "https://api.anthropic.com",
+        "apiKey": "ANTHROPIC_API_KEY",
+        "models": ["claude-sonnet-4-5", "claude-3-haiku-20240307", "claude-opus-4-5"],
+        "priority": 1
+      },
+      "google": {
+        "enabled": true,
+        "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+        "apiKey": "GOOGLE_API_KEY",
+        "models": ["gemini-2.5-pro", "gemini-3.1-pro-preview"],
+        "priority": 2
+      },
+      "xai": {
+        "enabled": true,
+        "baseUrl": "https://api.x.ai/v1",
+        "apiKey": "XAI_API_KEY",
+        "models": ["grok-2", "grok-2-latest"],
+        "priority": 3
+      },
+      "deepseek": {
+        "enabled": true,
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "DEEPSEEK_API_KEY",
+        "models": ["deepseek-chat", "deepseek-coder"],
+        "priority": 4
+      }
+    }
+  },
+  "skills": {
+    "smart-parenting-orchestrator": {
+      "enabled": true,
+      "triggers": ["anak", "bayi", "parenting", "child", "baby"],
+      "language": ["id", "en"]
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "enabled": true,
+      "resetOnRestart": false,
+      "sessionPersistence": true
+    }
+  }
+}
